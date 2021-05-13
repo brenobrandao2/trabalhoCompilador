@@ -14,7 +14,6 @@ if __name__ == "__main__":
             token = lexer.proxToken()
             continue
         print(token.toString(), "Linha: " + str(token.getLinha()) + " Coluna: " + str(token.getColuna()))
-        # Imprimindo reconhecimento do fim do arquivo
         if token.getNome() == Tag.EOF:
             break
         token = lexer.proxToken()

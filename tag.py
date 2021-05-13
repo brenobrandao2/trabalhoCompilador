@@ -8,68 +8,36 @@ class Tag(Enum):
     KW_IF = 1
     KW_ELSE = 2
     KW_PRINT = 4
-    KW_WHILE = 5
-    KW_WRITE = 6
-    KW_READ = 7
-    KW_NUM = 8
-    KW_CHAR = 9
-    KW_NOT = 10
-    KW_OR = 11
-    KW_AND = 12
-    KW_PROGRAM = 13
+    KW_NUM = 5
+    KW_CHAR = 6
+    KW_OR = 7
+    KW_AND = 8
+    KW_NOT = 9
+    KW_WRITE = 10
+    KW_WHILE = 11
+    KW_PROGRAM = 12
+    KW_READ = 13
 
     # Operadores
-    # ==
-    OP_EQ = 14
-
-    # !=
-    OP_NE = 15
-
-    # >
-    OP_GT = 16
-
-    # <
-    OP_LT = 17
-
-    # >=
-    OP_GE = 18
-
-    # <=
-    OP_LE = 19
-
-    # +
-    OP_AD = 20
-
-    # -
-    OP_MIN = 21
-
-    # *
-    OP_MUL = 22
-
-    # /
-    OP_DIV = 23
-
-    # =
-    OP_ATRIB = 24
+    OP_MENOR = 14  # <
+    OP_MENOR_IGUAL = 15  # <=
+    OP_MAIOR_IGUAL = 16  # >=
+    OP_MAIOR = 17  # >
+    OP_IGUAL = 18  # =
+    OP_NAO_IGUAL = 19  # !=
+    OP_DIVISAO = 20  # /
+    OP_MULTIPLICACAO = 21  # *
+    OP_SOMA = 22  # +
+    OP_SUBTRACAO = 23  # -
+    OP_IGUAL_IGUAL = 24  # ==
 
     # Simbolos
-    # {
-    SMB_OBC = 25
-
-    # }
-    SMB_CBC = 26
-
-    # (
-    SMB_OPA = 27
-
-    # )
-    SMB_CPA = 28
-
-    # ,
-    SMB_COM = 29
-
-    # ;
-    SMB_SEM = 30
+    SMB_PONTO_VIRGULA = 25  # ;
+    SMB_ABRE_PAREN = 26  # (
+    SMB_FECHA_PAREN = 27  # )
+    SMB_VIRGULA = 28  # ,
+    SMB_ABRE_CHAVE = 29  # {
+    SMB_FECHA_CHAVE = 30  # }
 
     # Identificador
     ID = 31
