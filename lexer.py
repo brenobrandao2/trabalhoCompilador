@@ -87,12 +87,12 @@ class Lexer:
                     estado = 14
                 elif c == '/':
                     estado = 16
-                elif c == '-':
-                    return Token(Tag.OP_MENOR, "-", self.n_line, self.n_column)
                 elif c == '+':
                     return Token(Tag.OP_SOMA, "+", self.n_line, self.n_column)
                 elif c == '*':
                     return Token(Tag.OP_MULTIPLICACAO, "*", self.n_line, self.n_column)
+                elif c == '-':
+                    return Token(Tag.OP_MENOR, "-", self.n_line, self.n_column)
                 elif c == '{':
                     return Token(Tag.SMB_ABRE_CHAVE, "{", self.n_line, self.n_column)
                 elif c == '}':
