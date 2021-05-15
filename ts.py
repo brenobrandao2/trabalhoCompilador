@@ -2,44 +2,54 @@ from tag import Tag
 from token import Token
 
 class TS:
-    # dicionario: {"chave" : "valor"}
-    def __init__(self):
-        self.ts = {}
+    '''
+      Classe para a tabela de simbolos representada por um dicionario: {'chave' : 'valor'}
+      '''
 
+    def __init__(self):
+
+        '''
+         Repare que as palavras reservadas sao todas cadastradas
+         a principio com linha e coluna em zero
+         '''
+        self.ts = {}
         # Palavras-chave
         self.ts['if'] = Token(Tag.KW_IF, 'if', 0, 0)
         self.ts['else'] = Token(Tag.KW_ELSE, 'else', 0, 0)
         self.ts['print'] = Token(Tag.KW_PRINT, 'print', 0, 0)
-        self.ts['while'] = Token(Tag.KW_WHILE, 'while', 0, 0)
-        self.ts['write'] = Token(Tag.KW_WRITE, 'write', 0, 0)
-        self.ts['read'] = Token(Tag.KW_READ, 'read', 0, 0)
         self.ts['num'] = Token(Tag.KW_NUM, 'num', 0, 0)
         self.ts['char'] = Token(Tag.KW_CHAR, 'char', 0, 0)
-        self.ts['not'] = Token(Tag.KW_NOT, 'not', 0, 0)
         self.ts['or'] = Token(Tag.KW_OR, 'or', 0, 0)
         self.ts['and'] = Token(Tag.KW_AND, 'and', 0, 0)
+        self.ts['not'] = Token(Tag.KW_NOT, 'not', 0, 0)
+        self.ts['write'] = Token(Tag.KW_WRITE, 'write', 0, 0)
+        self.ts['while'] = Token(Tag.KW_WHILE, 'while', 0, 0)
         self.ts['program'] = Token(Tag.KW_PROGRAM, 'program', 0, 0)
+        self.ts['read'] = Token(Tag.KW_READ, 'read', 0, 0)
+
 
         # Operadores
-        self.ts['=='] = Token(Tag.OP_IGUAL_IGUAL, '==', 0, 0)
-        self.ts['!='] = Token(Tag.OP_NAO_IGUAL, '!=', 0, 0)
-        self.ts['>'] = Token(Tag.OP_MAIOR, '>', 0, 0)
         self.ts['<'] = Token(Tag.OP_MENOR, '<', 0, 0)
-        self.ts['>='] = Token(Tag.OP_MAIOR_IGUAL, '>=', 0, 0)
         self.ts['<='] = Token(Tag.OP_MENOR_IGUAL, '<=', 0, 0)
+        self.ts['>='] = Token(Tag.OP_MAIOR_IGUAL, '>=', 0, 0)
+        self.ts['>'] = Token(Tag.OP_MAIOR, '>', 0, 0)
+        self.ts['='] = Token(Tag.OP_IGUAL, '=', 0, 0)
+        self.ts['!='] = Token(Tag.OP_NAO_IGUAL, '!=', 0, 0)
+        self.ts['/'] = Token(Tag.OP_DIVISAO, '/', 0, 0)
+        self.ts['*'] = Token(Tag.OP_MULTIPLICACAO, '*', 0, 0)
         self.ts['+'] = Token(Tag.OP_SOMA, '+', 0, 0)
         self.ts['-'] = Token(Tag.OP_SUBTRACAO, '-', 0, 0)
-        self.ts['*'] = Token(Tag.OP_MULTIPLICACAO, '*', 0, 0)
-        self.ts['/'] = Token(Tag.OP_DIVISAO, '/', 0, 0)
-        self.ts['='] = Token(Tag.OP_IGUAL, '=', 0, 0)
+        self.ts['=='] = Token(Tag.OP_IGUAL_IGUAL, '==', 0, 0)
 
-        # Operadores
-        self.ts['{'] = Token(Tag.SMB_ABRE_CHAVE, '{', 0, 0)
-        self.ts['}'] = Token(Tag.SMB_FECHA_CHAVE, '}', 0, 0)
+
+        # Simbolos
+        self.ts[';'] = Token(Tag.SMB_PONTO_VIRGULA, ';', 0, 0)
         self.ts['('] = Token(Tag.SMB_ABRE_PAREN, '(', 0, 0)
         self.ts[')'] = Token(Tag.SMB_FECHA_PAREN, ')', 0, 0)
         self.ts[','] = Token(Tag.SMB_VIRGULA, ',', 0, 0)
-        self.ts[';'] = Token(Tag.SMB_PONTO_VIRGULA, ';', 0, 0)
+        self.ts['{'] = Token(Tag.SMB_ABRE_CHAVE, '{', 0, 0)
+        self.ts['}'] = Token(Tag.SMB_FECHA_CHAVE, '}', 0, 0)
+
 
         # Identificador
         self.ts['id'] = Token(Tag.ID, 'id', 0, 0)
