@@ -29,7 +29,7 @@ class Lexer:
             self.n_line = 1
             self.n_column = 0
             self.ts = TS()
-            self.totalErros = 0
+            self.erros = 0
         except IOError:
             print('Erro de abertura do arquivo. Encerrando.')
             sys.exit(0)
@@ -42,7 +42,7 @@ class Lexer:
             sys.exit(0)
 
     def sinalizaErroLexico(self, message):
-        self.totalErros = self.totalErros + 1
+        self.erros = self.erros + 1
         print("[Erro Lexico]: ", message, "\n")
 
     def retornaPonteiro(self):
@@ -62,7 +62,8 @@ class Lexer:
             self.lookahead = self.input_file.read(1)
             c = self.lookahead.decode('ascii')
             self.n_column = self.n_column + 1
-
+            if c == "\n":
+                self.n_column = 0
             if estado == 1:
                 if c == '':
                     return Token(Tag.EOF, "EOF", self.n_line, self.n_column)
@@ -70,7 +71,6 @@ class Lexer:
                     estado = 1
                     if c == '\n':
                         self.n_line = self.n_line + 1
-                        self.n_column = 0
                 elif c == '=':
                     estado = 2
                 elif c == '!':
@@ -85,35 +85,35 @@ class Lexer:
                 elif c.isalpha():
                     lexema += c
                     estado = 14
-                elif c == '/':
-                    estado = 16
-                elif c == '+':
-                    return Token(Tag.OP_SOMA, "+", self.n_line, self.n_column)
-                elif c == '*':
-                    return Token(Tag.OP_MULTIPLICACAO, "*", self.n_line, self.n_column)
-                elif c == '-':
-                    return Token(Tag.OP_MENOR, "-", self.n_line, self.n_column)
                 elif c == '{':
                     return Token(Tag.SMB_ABRE_CHAVE, "{", self.n_line, self.n_column)
                 elif c == '}':
                     return Token(Tag.SMB_FECHA_CHAVE, "}", self.n_line, self.n_column)
-                elif c == ';':
-                    return Token(Tag.SMB_PONTO_VIRGULA, ";", self.n_line, self.n_column)
-                elif c == ',':
-                    return Token(Tag.SMB_VIRGULA, ",", self.n_line, self.n_column)
                 elif c == '(':
                     return Token(Tag.SMB_ABRE_PAREN, "(", self.n_line, self.n_column)
                 elif c == ')':
                     return Token(Tag.SMB_FECHA_PAREN, ")", self.n_line, self.n_column)
+                elif c == '/':
+                    estado = 16
+                elif c == '-':
+                    return Token(Tag.OP_MENOR, "-", self.n_line, self.n_column)
+                elif c == '+':
+                    return Token(Tag.OP_SOMA, "+", self.n_line, self.n_column)
+                elif c == '*':
+                    return Token(Tag.OP_MULTIPLICACAO, "*", self.n_line, self.n_column)
+                elif c == ';':
+                    return Token(Tag.SMB_PONTO_VIRGULA, ";", self.n_line, self.n_column)
+                elif c == ',':
+                    return Token(Tag.SMB_VIRGULA, ",", self.n_line, self.n_column)
                 elif c == '"':
                     estado = 21
                 else:
                     lexema += c
                     self.sinalizaErroLexico("Caractere invalido [" + c + "] na linha " + str(self.n_line) + " e coluna " + str(self.n_column))
-                    if self.totalErros == 3:
+                    if self.erros == 3:
                         return None
                     else:
-                        return ''
+                        return False
             elif estado == 2:
                 if c == '=':
                     return Token(Tag.OP_IGUAL_IGUAL, "==", self.n_line, self.n_column)
@@ -127,10 +127,10 @@ class Lexer:
                 self.sinalizaErroLexico("Caractere invalido [" + c + "] na linha " + str(self.n_line) + " e coluna " + str(self.n_column))
                 self.retornaPonteiro()
 
-                if self.totalErros == 3:
+                if self.erros == 3:
                     return None
                 else:
-                    return ''
+                    return False
             elif estado == 6:
                 if c == '=':
                     return Token(Tag.OP_MENOR_IGUAL, "<=", self.n_line, self.n_column)
@@ -177,7 +177,6 @@ class Lexer:
             elif estado == 17:
                 if c == '\n':
                     self.n_line = self.n_line + 1
-                    self.n_column = 0
                     estado = 1
                 elif c == '':
                     return Token(Tag.EOF, "EOF", self.n_line, self.n_column)
@@ -186,7 +185,6 @@ class Lexer:
                     estado = 19
                 elif c == '\n':
                     self.n_line = self.n_line + 1
-                    self.n_column = 1
                 elif c == '':
                     return Token(Tag.EOF, "EOF", self.n_line, self.n_column - 1)
             elif estado == 19:
@@ -201,15 +199,14 @@ class Lexer:
                     self.retornaPonteiro()
                     return Token(Tag.NUM_CONST, lexema, self.n_line, self.n_column)
             elif estado == 21:
-                if c == '"':
-                    return Token(Tag.CHAR_CONST, lexema, self.n_line, self.n_column - 1)
-                elif c == '\n':
+                if c == '\n':
                     self.n_line = self.n_line + 1
-                    self.n_column = 0
                 elif c == '':
                     coluna = self.n_column
                     self.n_column = 0
                     return Token(Tag.CHAR_CONST, lexema, self.n_line, coluna)
+                elif c == '"':
+                    return Token(Tag.CHAR_CONST, lexema, self.n_line, self.n_column - 1)
                 lexema += c
             # fim if's de estados
         # fim while

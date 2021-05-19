@@ -1,10 +1,11 @@
 program nomeDoPrograma:
+//MUDAR TODO SERIO
 
 var nome = "teste", idade = 1, endereco = "bh";
 
 if (var - 100) >= 200.123 then
-    @print var;
+
 else if var > 100 then
-@print var
+
 else
-   @print 100
+
