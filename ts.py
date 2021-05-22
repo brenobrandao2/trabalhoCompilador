@@ -70,3 +70,6 @@ class TS:
     def printTS(self):
         for k, t in (self.ts.items()):
             print(k, ":", t.toString())
+
+    def udpatePosition(self, lexema, token):
+        self.ts[lexema] = token

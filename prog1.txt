@@ -1,11 +1,6 @@
-program nomeDoPrograma:
-//MUDAR TODO SERIO
-
-var nome = "teste", idade = 1, endereco = "bh";
-
-if (var - 100) >= 200.123 then
-
-else if var > 100 then
-
-else
-
+    var nome = "Breno
+    if (true)
+    var@
+        id = 1
+    var2@
+    id2 = 1

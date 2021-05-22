@@ -7,19 +7,14 @@ if __name__ == "__main__":
 
     print("\nLista de tokens:\n")
     token = lexer.proxToken()
-  ##### MUDARRRRRRR
-    if token.getNome() != Tag.EOF:
-        print("Teste")
+    while token is not None:
+        if token == '':
+            token = lexer.proxToken()
+            continue
         print(token.toString(), "Linha: " + str(token.getLinha()) + " Coluna: " + str(token.getColuna()))
-    else:
-        print("Teste2")
-        while token is not None:
-            if token == False:
-                token = lexer.proxToken()
-                continue
-        print(token.toString(), "Linha: " + str(token.getLinha()) + " Coluna: " + str(token.getColuna()))
+        if token.getNome() == Tag.EOF:
+            break
         token = lexer.proxToken()
-    ##### FIM MUDARRRRRRR
     print("\nTabela de simbolos:\n")
     lexer.printTS()
     lexer.closeFile()
